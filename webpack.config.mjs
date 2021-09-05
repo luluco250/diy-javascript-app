@@ -1,36 +1,27 @@
 import path from "path";
 import url from "url";
-import json5 from "json5";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
 const dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 export default {
-	entry: "./source/index.js",
+	mode: "development",
+	devtool: "inline-source-map",
+	devServer: {
+		static: "./public",
+	},
+	entry: {
+		index: "./source/index.js",
+		print: "./source/print.js",
+	},
 	output: {
-		filename: "bundle.js",
+		filename: "[name].bundle.js",
 		path: path.resolve(dirname, "public"),
+		clean: true,
 	},
-	module: {
-		rules: [
-			{
-				test: /\.css$/i,
-				use: ["style-loader", "css-loader"],
-			},
-			{
-				test: /\.(bmp|png|svg|jpe?g|gif)$/i,
-				type: "asset/resource",
-			},
-			{
-				test: /\.(woff2?|eot|ttf|otf)$/i,
-				type: "asset/resource",
-			},
-			{
-				test: /\.json5$/i,
-				type: "json",
-				parser: {
-					parse: json5.parse,
-				},
-			},
-		],
-	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			title: "Development",
+		}),
+	],
 };

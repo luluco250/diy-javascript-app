@@ -1,7 +1,16 @@
-import { helloWorld } from "./components/hello-world";
-import { vergil } from "./components/vergil";
-import "./fonts/SourceSansPro/font.css";
+import { printMe } from "./print";
 
-const root = document.getElementById("root");
-root.appendChild(helloWorld());
-root.appendChild(vergil());
+function component() {
+	const div = document.createElement("div");
+	div.textContent = "Hello world!";
+
+	const button = document.createElement("button");
+	button.textContent = "Click me.";
+	button.onclick = printMe;
+
+	div.appendChild(button);
+	return div;
+}
+
+document.body.appendChild(component());
+
