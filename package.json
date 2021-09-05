@@ -1,0 +1,17 @@
+{
+  "name": "webpack-typescript-test-app",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^6.2.0",
+    "json5": "^2.2.0",
+    "style-loader": "^3.2.1",
+    "webpack": "^5.52.0",
+    "webpack-cli": "^4.8.0"
+  }
+}
