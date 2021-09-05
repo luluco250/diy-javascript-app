@@ -11,7 +11,7 @@ export default {
 	devServer: {
 		static: "./public",
 	},
-	entry: "./source/main.jsx",
+	entry: "./source/main.tsx",
 	output: {
 		path: path.resolve(dirname, "public"),
 		clean: true,
@@ -21,22 +21,12 @@ export default {
 		new MiniCssExtractPlugin(),
 	],
 	resolve: {
-		extensions: [".js", ".jsx", ".json", ".wasm"],
+		extensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".wasm"],
 	},
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				use: {
-					loader: "babel-loader",
-					options: {
-						presets: ["@babel/preset-env"],
-					},
-				},
-			},
-			{
-				test: /\.jsx$/,
+				test: /\.jsx?$/,
 				exclude: /node_modules/,
 				use: {
 					loader: "babel-loader",
@@ -44,6 +34,19 @@ export default {
 						presets: ["@babel/preset-react"],
 					},
 				},
+			},
+			{
+				test: /\.tsx?$/,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: "babel-loader",
+						options: {
+							presets: ["@babel/preset-react"],
+						},
+					},
+					"ts-loader",
+				],
 			},
 			{
 				test: /\.html$/i,
